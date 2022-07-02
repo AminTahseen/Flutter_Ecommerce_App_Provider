@@ -25,8 +25,9 @@ class ProductListItem extends StatelessWidget {
               child: Container(
                 width: 100,
                 height: 100,
-                child: Image.network(
-                  _imageURL,
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/loading.gif',
+                  image: _imageURL,
                 ),
               ),
             ),
@@ -42,13 +43,11 @@ class ProductListItem extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(left: 10.0),
-              child: Expanded(
-                child: Text(
-                  _productPrice,
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Text(
+                _productPrice,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

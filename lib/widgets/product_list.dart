@@ -1,4 +1,5 @@
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/screens/product_details.dart';
 import 'package:ecommerce_app_provider/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +45,21 @@ class ProductList extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 4.0,
         mainAxisSpacing: 8.0,
-        children: List.generate(productNames.length, (index) {
-          return ProductListItem(
-            productCardColor[index],
-            productImagesURL[index],
-            productNames[index],
-            productsPrice[index],
-          );
-        }),
+        children: List.generate(
+          productNames.length,
+          (index) {
+            return InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, ProductDetailsScreen.routeName),
+              child: ProductListItem(
+                productCardColor[index],
+                productImagesURL[index],
+                productNames[index],
+                productsPrice[index],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
