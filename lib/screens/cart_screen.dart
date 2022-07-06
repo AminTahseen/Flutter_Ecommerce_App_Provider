@@ -1,15 +1,24 @@
 import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
+import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   static const routeName = '/cart';
 
-  const CartScreen({Key? key}) : super(key: key);
+  CartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppBar(context: context, title: 'Cart', hasBottom: false),
+      drawer: NavigationDrawer(),
+      key: _scaffoldkey,
+      appBar: mainAppBar(
+        context: context,
+        title: 'Cart',
+        hasBottom: false,
+        key: _scaffoldkey,
+      ),
       body: Center(
         child: Text('Cart Screen'),
       ),

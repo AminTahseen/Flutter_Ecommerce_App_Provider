@@ -1,19 +1,24 @@
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
+import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
 import 'package:ecommerce_app_provider/widgets/product_list.dart';
 import 'package:ecommerce_app_provider/widgets/products_category.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   static const routeName = '/home';
 
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
+      drawer: NavigationDrawer(),
       backgroundColor: HexColor('#f1f2f6'),
-      appBar: mainAppBar(context: context, title: 'Home', hasBottom: true),
+      appBar: mainAppBar(
+          context: context, title: 'Home', hasBottom: true, key: _scaffoldkey),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
