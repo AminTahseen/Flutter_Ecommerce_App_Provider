@@ -1,5 +1,5 @@
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
-import 'package:ecommerce_app_provider/screens/home_screen.dart';
+import 'package:ecommerce_app_provider/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -73,6 +73,8 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout_outlined),
             title: Text('Logout'),
+            onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreen.routeName, (Route<dynamic> route) => false),
           ),
         ],
       ),
