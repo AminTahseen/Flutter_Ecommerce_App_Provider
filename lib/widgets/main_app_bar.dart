@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ AppBar mainAppBar({
   required GlobalKey<ScaffoldState> key,
 }) {
   return AppBar(
-    backgroundColor: HexColor("#ff5252"),
+    backgroundColor: HexColor(mainAppColorCode),
     leading: IconButton(
         onPressed: () => key.currentState!.openDrawer(),
         icon: Icon(Icons.auto_awesome_mosaic_outlined)),
@@ -31,7 +32,7 @@ AppBar mainAppBar({
             preferredSize: const Size.fromHeight(60),
             child: Container(
               margin: const EdgeInsets.all(10.0),
-              color: HexColor("#ff5252"),
+              color: HexColor(mainAppColorCode),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -64,7 +65,7 @@ AppBar mainAppBar({
                     child: IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.insert_chart_outlined_sharp),
-                      color: Colors.red,
+                      color: HexColor(mainAppColorCode),
                     ),
                   ),
                 ],

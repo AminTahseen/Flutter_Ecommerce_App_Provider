@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class NavigationDrawer extends StatelessWidget {
               child: Text(
                 "Max Huang",
                 style: TextStyle(
-                    color: HexColor("#ff5252"),
+                    color: HexColor(mainAppColorCode),
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),

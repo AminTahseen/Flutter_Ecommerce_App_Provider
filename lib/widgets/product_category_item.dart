@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +25,9 @@ class _ProductCategoryItemState extends State<ProductCategoryItem> {
             ? Container(
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: HexColor(mainAppColorCode),
                     border: Border.all(
-                      color: Colors.red,
+                      color: HexColor(mainAppColorCode),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 child: Row(

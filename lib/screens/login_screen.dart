@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: HexColor("#ff5252"),
+        backgroundColor: HexColor(mainAppColorCode),
         title: Text('Provider | Ecommerce'),
       ),
       body: Center(
@@ -28,12 +29,20 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ListView(
             children: <Widget>[
               Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  Icons.shopping_bag_outlined,
+                  size: 50,
+                ),
+              ),
+              Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    'Login',
+                    'Login Now',
                     style: TextStyle(
-                        color: HexColor("#ff5252"),
+                        color: HexColor(mainAppColorCode),
                         fontWeight: FontWeight.w500,
                         fontSize: 30),
                   )),
@@ -52,10 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: Colors.grey)),
                     labelText: 'User Name',
-                    labelStyle: TextStyle(color: HexColor("#ff5252")),
+                    labelStyle: TextStyle(color: HexColor(mainAppColorCode)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 3, color: HexColor("#ff5252"))),
+                        borderSide: BorderSide(
+                            width: 3, color: HexColor(mainAppColorCode))),
                   ),
                 ),
               ),
@@ -68,10 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: Colors.grey)),
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: HexColor("#ff5252")),
+                    labelStyle: TextStyle(color: HexColor(mainAppColorCode)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 3, color: HexColor("#ff5252"))),
+                        borderSide: BorderSide(
+                            width: 3, color: HexColor(mainAppColorCode))),
                   ),
                 ),
               ),
@@ -81,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Text(
                   'Forgot Password',
-                  style: TextStyle(color: HexColor("#ff5252")),
+                  style: TextStyle(color: HexColor(mainAppColorCode)),
                 ),
               ),
               Container(
@@ -89,8 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                     child: const Text('Login'),
-                    style:
-                        ElevatedButton.styleFrom(primary: HexColor("#ff5252")),
+                    style: ElevatedButton.styleFrom(
+                        primary: HexColor(mainAppColorCode)),
                     onPressed: () {
                       if (nameController.text == 'ameen' &&
                           passwordController.text == '123456') {
@@ -113,12 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   )),
               Row(
                 children: <Widget>[
-                  const Text('Does not have account?'),
+                  const Text('Or you can sign in with'),
                   TextButton(
                     child: Text(
-                      'Sign up',
-                      style:
-                          TextStyle(fontSize: 20, color: HexColor("#ff5252")),
+                      'Google',
+                      style: TextStyle(fontSize: 20, color: HexColor("EA4335")),
                     ),
                     onPressed: () {
                       //signup screen
