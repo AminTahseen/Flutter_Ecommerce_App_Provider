@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor(mainBgColorCode),
       appBar: AppBar(
         backgroundColor: HexColor(mainAppColorCode),
         title: Text('Provider | Ecommerce'),
@@ -61,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: Colors.grey)),
                     labelText: 'User Name',
-                    labelStyle: TextStyle(color: HexColor(mainAppColorCode)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: HexColor(mainAppColorCode))),
@@ -77,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: Colors.grey)),
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: HexColor(mainAppColorCode)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             width: 3, color: HexColor(mainAppColorCode))),
@@ -94,32 +93,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Container(
-                  height: 50,
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: ElevatedButton(
-                    child: const Text('Login'),
-                    style: ElevatedButton.styleFrom(
-                        primary: HexColor(mainAppColorCode)),
-                    onPressed: () {
-                      if (nameController.text == 'ameen' &&
-                          passwordController.text == '123456') {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            HomeScreen.routeName,
-                            (Route<dynamic> route) => false);
-                      } else if (nameController.text.isEmpty ||
-                          passwordController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Fields cannot be empty !'),
-                          backgroundColor: Colors.red,
-                        ));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('1 or 2 fields are not correct !'),
-                          backgroundColor: Colors.red,
-                        ));
-                      }
-                    },
-                  )),
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: ElevatedButton(
+                  child: const Text('Login'),
+                  style: ElevatedButton.styleFrom(
+                      primary: HexColor(mainAppColorCode)),
+                  onPressed: () {
+                    if (nameController.text == 'ameen' &&
+                        passwordController.text == '123456') {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          HomeScreen.routeName,
+                          (Route<dynamic> route) => false);
+                    } else if (nameController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Fields cannot be empty !'),
+                        backgroundColor: Colors.red,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('1 or 2 fields are not correct !'),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                  },
+                ),
+              ),
               Row(
                 children: <Widget>[
                   const Text('Or you can sign in with'),

@@ -1,29 +1,37 @@
 import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/constants/utils/product_details_args.dart';
+import 'package:ecommerce_app_provider/models/products.dart';
 import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
 import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
+import 'package:ecommerce_app_provider/widgets/product_detail.dart';
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
-  static const routeName = '/cart';
-
-  CartScreen({Key? key}) : super(key: key);
+  static const routeName = '/productDetails';
+  ProductDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var args;
+    if (ModalRoute.of(context)!.settings.arguments != null) {
+      args = ModalRoute.of(context)!.settings.arguments as ProductDetailsArgs;
+    }
     return Scaffold(
       drawer: NavigationDrawer(),
       backgroundColor: HexColor(mainBgColorCode),
       key: _scaffoldkey,
       appBar: mainAppBar(
         context: context,
-        title: 'Cart',
+        title: 'Details',
         hasBottom: false,
         key: _scaffoldkey,
       ),
       body: Center(
-        child: Text('Cart Screen'),
+        child: args != null
+            ? ProductDetails(product: args.product as Product)
+            : Text('data'),
       ),
     );
   }

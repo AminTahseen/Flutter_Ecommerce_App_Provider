@@ -1,5 +1,5 @@
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
-import 'package:ecommerce_app_provider/screens/product_details.dart';
+import 'package:ecommerce_app_provider/screens/product_details_screen.dart';
 import 'package:ecommerce_app_provider/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 

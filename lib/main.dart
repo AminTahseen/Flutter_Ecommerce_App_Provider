@@ -1,11 +1,17 @@
+import 'package:ecommerce_app_provider/providers/ecommerce_provider.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
+import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
-import 'package:ecommerce_app_provider/screens/product_details.dart';
+import 'package:ecommerce_app_provider/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => EcommerceProvider())],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +26,7 @@ class MyApp extends StatelessWidget {
         CartScreen.routeName: (context) => CartScreen(),
         ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
+        CategoriesProducts.routeName: (context) => CategoriesProducts(),
       },
     );
   }

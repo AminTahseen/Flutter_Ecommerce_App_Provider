@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:ecommerce_app_provider/constants/constants.dart';
 import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
@@ -20,12 +21,22 @@ AppBar mainAppBar({
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
     actions: <Widget>[
-      IconButton(
-        onPressed: () => Navigator.pushNamed(context, CartScreen.routeName),
-        icon: Icon(
-          Icons.shopping_bag_outlined,
+      InkWell(
+        onTap: () => Navigator.pushNamed(context, CartScreen.routeName),
+        child: Container(
+          padding: const EdgeInsets.only(top: 10.0, right: 10.0),
+          margin: const EdgeInsets.only(right: 5.0),
+          child: Badge(
+            badgeColor: Colors.yellow,
+            badgeContent: Text(
+              '5',
+            ),
+            child: Icon(
+              Icons.shopping_bag_outlined,
+            ),
+          ),
         ),
-      )
+      ),
     ],
     bottom: hasBottom == true
         ? PreferredSize(

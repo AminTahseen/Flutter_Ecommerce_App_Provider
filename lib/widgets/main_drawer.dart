@@ -28,7 +28,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
             ),
             accountEmail: Text(
-              "sundar@appmaking.co",
+              "huang_max@appmaking.co",
               style: TextStyle(color: Colors.black54),
             ),
             currentAccountPicture: CircleAvatar(
