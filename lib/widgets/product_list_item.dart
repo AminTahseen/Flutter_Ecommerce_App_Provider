@@ -35,6 +35,7 @@ class ProductListItem extends StatelessWidget {
               margin: const EdgeInsets.all(10.0),
               child: Text(
                 _productName,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class ProductListItem extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(left: 10.0),
               child: Text(
-                _productPrice,
+                '\$ $_productPrice',
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,

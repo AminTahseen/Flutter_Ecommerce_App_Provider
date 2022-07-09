@@ -1,5 +1,5 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,15 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: HexColor(mainBgColorCode),
       appBar: AppBar(
         backgroundColor: HexColor(mainAppColorCode),
-        title: Text('Provider | Ecommerce'),
+        title: Row(
+          children: [
+            Icon(Icons.shopping_bag_outlined),
+            SizedBox(
+              width: 10,
+            ),
+            Text('Ecommercia')
+          ],
+        ),
       ),
       body: Center(
         child: Container(

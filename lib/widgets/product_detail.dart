@@ -1,6 +1,7 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/models/products.dart';
+import 'package:ecommerce_app_provider/widgets/image_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -11,17 +12,26 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: <Widget>[
               SizedBox(
-                height: 330,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network(
-                  product.image,
-                  fit: BoxFit.fill,
+                height: MediaQuery.of(context).size.height * 0.4,
+                child: InkWell(
+                  onTap: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (_) => ImageDialog(
+                              imageURL: product.image,
+                            ));
+                  },
+                  child: Image.network(
+                    product.image,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ), // should be a paged
               // view.
@@ -33,8 +43,8 @@ class ProductDetails extends StatelessWidget {
                     ),
                     backgroundColor: HexColor(mainAppColorCode),
                     onPressed: () {}),
-                bottom: 20,
-                right: 20,
+                bottom: 10,
+                right: 10,
               ),
               Positioned(
                 child: Container(
@@ -47,11 +57,15 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    color: HexColor('#26de81'),
-                  ),
+                      color: HexColor('#26de81'),
+                      borderRadius: new BorderRadius.only(
+                          topLeft: const Radius.circular(10.0),
+                          topRight: const Radius.circular(10.0),
+                          bottomLeft: const Radius.circular(10.0),
+                          bottomRight: const Radius.circular(10.0))),
                 ),
-                top: 20,
-                left: 20,
+                top: 10,
+                left: 10,
               )
             ],
           ),
@@ -88,7 +102,7 @@ class ProductDetails extends StatelessWidget {
                 rating: product.rating.rate,
                 itemBuilder: (context, index) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: HexColor(mainAppColorCode),
                 ),
                 itemCount: 5,
                 itemSize: 50.0,

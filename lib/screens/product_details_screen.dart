@@ -1,6 +1,6 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
-import 'package:ecommerce_app_provider/constants/utils/product_details_args.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/utils/product_details_args.dart';
 import 'package:ecommerce_app_provider/models/products.dart';
 import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
 import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
@@ -24,15 +24,14 @@ class ProductDetailsScreen extends StatelessWidget {
       key: _scaffoldkey,
       appBar: mainAppBar(
         context: context,
-        title: 'Details',
+        title: (args.product as Product).title,
         hasBottom: false,
         key: _scaffoldkey,
+        isBackButton: true,
       ),
-      body: Center(
-        child: args != null
-            ? ProductDetails(product: args.product as Product)
-            : Text('data'),
-      ),
+      body: args != null
+          ? ProductDetails(product: args.product as Product)
+          : Text('data'),
     );
   }
 }

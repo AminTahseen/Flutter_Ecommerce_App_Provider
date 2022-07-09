@@ -1,5 +1,8 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
+import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -44,8 +47,8 @@ class NavigationDrawer extends StatelessWidget {
             leading: Icon(Icons.home_outlined),
             title: Text('Home'),
             onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  HomeScreen.routeName, (route) => false);
             },
           ),
           ListTile(
@@ -53,7 +56,10 @@ class NavigationDrawer extends StatelessWidget {
             title: Text('Favorties'),
           ),
           ListTile(
-            leading: Icon(Icons.list_alt_outlined),
+            onTap: () => Navigator.pushNamedAndRemoveUntil(
+                context, CategoriesProducts.routeName, (route) => false,
+                arguments: CategoryProductsArgs(-1)),
+            leading: Icon(Icons.add_shopping_cart_outlined),
             title: Text('All Products'),
           ),
           Divider(

@@ -1,23 +1,9 @@
 import 'package:ecommerce_app_provider/models/products.dart';
 import 'package:flutter/material.dart';
 
-class EcommerceProvider extends ChangeNotifier {
-  final List<String> _categoriesList = [];
+class ProductProvider extends ChangeNotifier {
   final List<Product> _productsList = [];
-
-  List<String> get getCategoriesList => _categoriesList;
   List<Product> get getProductsList => _productsList;
-
-  void clearCategoriesList() {
-    _categoriesList.clear();
-    notifyListeners();
-  }
-
-  void addCategories(String category) {
-    _categoriesList.add(category);
-    notifyListeners();
-  }
-
   void clearProductList() {
     _productsList.clear();
     notifyListeners();

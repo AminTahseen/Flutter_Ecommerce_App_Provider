@@ -1,5 +1,5 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductCategoryItem extends StatefulWidget {

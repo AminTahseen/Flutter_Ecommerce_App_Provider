@@ -1,7 +1,8 @@
 import 'package:badges/badges.dart';
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
+import 'package:ecommerce_app_provider/screens/filter_screen.dart';
 import 'package:flutter/material.dart';
 
 AppBar mainAppBar({
@@ -9,12 +10,19 @@ AppBar mainAppBar({
   required String title,
   required bool hasBottom,
   required GlobalKey<ScaffoldState> key,
+  bool isBackButton = false,
 }) {
   return AppBar(
     backgroundColor: HexColor(mainAppColorCode),
-    leading: IconButton(
-        onPressed: () => key.currentState!.openDrawer(),
-        icon: Icon(Icons.auto_awesome_mosaic_outlined)),
+    leading: isBackButton == true
+        ? IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back),
+          )
+        : IconButton(
+            onPressed: () => key.currentState!.openDrawer(),
+            icon: Icon(Icons.auto_awesome_mosaic_outlined),
+          ),
     centerTitle: true,
     title: Text(
       title,
@@ -74,7 +82,8 @@ AppBar mainAppBar({
                     margin: const EdgeInsets.only(left: 10.0),
                     height: 40,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Navigator.pushNamed(context, FilterScreen.routeName),
                       icon: Icon(Icons.insert_chart_outlined_sharp),
                       color: HexColor(mainAppColorCode),
                     ),

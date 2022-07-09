@@ -1,5 +1,5 @@
-import 'package:ecommerce_app_provider/constants/utils/category_product_args.dart';
-import 'package:ecommerce_app_provider/providers/ecommerce_provider.dart';
+import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
+import 'package:ecommerce_app_provider/providers/categories_provider.dart';
 import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
 import 'package:ecommerce_app_provider/widgets/product_category_item.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +38,12 @@ class _ProductCategoryState extends State<ProductCategory> {
         children: <Widget>[
           for (var index = 0;
               index <
-                  context.watch<EcommerceProvider>().getCategoriesList.length;
+                  context.watch<CategoryProvider>().getCategoriesList.length;
               index++)
             InkWell(
               onTap: () => setSelectedIndex(index, 'c'),
               child: ProductCategoryItem(
-                context.watch<EcommerceProvider>().getCategoriesList[index],
+                context.watch<CategoryProvider>().getCategoriesList[index],
                 index,
                 selectedIndex,
               ),

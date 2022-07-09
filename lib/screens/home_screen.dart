@@ -1,6 +1,8 @@
-import 'package:ecommerce_app_provider/constants/constants.dart';
-import 'package:ecommerce_app_provider/constants/utils/hex_color.dart';
-import 'package:ecommerce_app_provider/providers/ecommerce_provider.dart';
+import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
+import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/providers/categories_provider.dart';
+import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
 import 'package:ecommerce_app_provider/services/remote/remote_service.dart';
 import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
 import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
@@ -28,16 +30,17 @@ class _HomeScreenState extends State<HomeScreen> {
     this.getCategories(context);
   }
 
-  getCategories(BuildContext context) async {
+  void getCategories(BuildContext context) async {
     List<String>? categories = await RemoteService().getCategories();
     if (categories != null) {
-      context.read<EcommerceProvider>().clearCategoriesList();
+      context.read<CategoryProvider>().clearCategoriesList();
       setState(() {
         isCategLoaded = true;
       });
+
       for (var item in categories) {
         print('Category - $item');
-        context.read<EcommerceProvider>().addCategories(item);
+        context.read<CategoryProvider>().addCategories(item);
       }
     }
   }
@@ -54,21 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           child: Column(
             children: <Widget>[
-              Container(
-                height: 160,
-                margin: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: HexColor('#f1f2f6'),
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/main_banner.jpg"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              isCategLoaded ? ProductCategory() : CircularProgressIndicator(),
+              isCategLoaded
+                  ? ProductCategory()
+                  : Container(
+                      margin: const EdgeInsets.all(10.0),
+                      child: CircularProgressIndicator()),
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: Row(
@@ -79,15 +72,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      'View All',
-                      style:
-                          TextStyle(fontSize: 15.0, color: HexColor('#a4b0be')),
+                    InkWell(
+                      onTap: () => Navigator.pushNamed(
+                              context, CategoriesProducts.routeName,
+                              arguments: CategoryProductsArgs(-1))
+                          .then((value) =>
+                              value == true ? getCategories(context) : null),
+                      child: Text(
+                        'View All',
+                        style: TextStyle(
+                            fontSize: 15.0, color: HexColor('#a4b0be')),
+                      ),
                     )
                   ],
                 ),
               ),
-              ProductList(),
+              ProductList(
+                asyncFunc: () => getCategories(context),
+              ),
             ],
           ),
         ),
