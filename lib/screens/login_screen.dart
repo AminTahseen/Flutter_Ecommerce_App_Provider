@@ -15,6 +15,24 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  verifyLogin(BuildContext context) {
+    if (nameController.text == 'ameen' && passwordController.text == '123456') {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          HomeScreen.routeName, (Route<dynamic> route) => false);
+    } else if (nameController.text.isEmpty || passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Fields cannot be empty !'),
+        backgroundColor: Colors.red,
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('1 or 2 fields are not correct !'),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,25 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text('Login'),
                   style: ElevatedButton.styleFrom(
                       primary: HexColor(mainAppColorCode)),
-                  onPressed: () {
-                    if (nameController.text == 'ameen' &&
-                        passwordController.text == '123456') {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          HomeScreen.routeName,
-                          (Route<dynamic> route) => false);
-                    } else if (nameController.text.isEmpty ||
-                        passwordController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Fields cannot be empty !'),
-                        backgroundColor: Colors.red,
-                      ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('1 or 2 fields are not correct !'),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
-                  },
+                  onPressed: () => verifyLogin(context),
                 ),
               ),
               Row(

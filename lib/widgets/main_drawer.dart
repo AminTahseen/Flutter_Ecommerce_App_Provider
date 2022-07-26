@@ -24,7 +24,7 @@ class NavigationDrawer extends StatelessWidget {
             accountName: Container(
               margin: const EdgeInsets.only(top: 20.0),
               child: Text(
-                "Max Huang",
+                "Ameen Tehseen",
                 style: TextStyle(
                     color: HexColor(mainAppColorCode),
                     fontSize: 20,
@@ -32,7 +32,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
             ),
             accountEmail: Text(
-              "huang_max@appmaking.co",
+              "ameen@appmaking.co",
               style: TextStyle(color: Colors.black54),
             ),
             currentAccountPicture: CircleAvatar(
