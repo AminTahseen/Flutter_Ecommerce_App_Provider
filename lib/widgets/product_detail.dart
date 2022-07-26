@@ -13,12 +13,11 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool checkIfFavourite() {
-      if (context
-          .watch<FavouriteProvider>()
-          .getFavouriteProductsList
-          .contains(product)) {
+      if (context.read<FavouriteProvider>().getSingleItem(product.title)) {
+        print("true ");
         return true;
       } else {
+        print("false ");
         return false;
       }
     }
@@ -36,10 +35,11 @@ class ProductDetails extends StatelessWidget {
                 child: InkWell(
                   onTap: () async {
                     await showDialog(
-                        context: context,
-                        builder: (_) => ImageDialog(
-                              imageURL: product.image,
-                            ));
+                      context: context,
+                      builder: (_) => ImageDialog(
+                        imageURL: product.image,
+                      ),
+                    );
                   },
                   child: Image.network(
                     product.image,
@@ -55,7 +55,7 @@ class ProductDetails extends StatelessWidget {
                         child: Icon(
                           Icons.favorite,
                         ),
-                        backgroundColor: HexColor(mainAppColorCode),
+                        backgroundColor: Colors.red,
                         onPressed: () => context
                             .read<FavouriteProvider>()
                             .removeProductFromFavourite(product),
