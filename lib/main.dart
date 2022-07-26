@@ -1,7 +1,9 @@
 import 'package:ecommerce_app_provider/providers/categories_provider.dart';
+import 'package:ecommerce_app_provider/providers/favourite_provider.dart';
 import 'package:ecommerce_app_provider/providers/product_provider.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
 import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
+import 'package:ecommerce_app_provider/screens/favourites_screen.dart';
 import 'package:ecommerce_app_provider/screens/filter_screen.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
@@ -13,7 +15,8 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
-      ChangeNotifierProvider(create: (_) => ProductProvider())
+      ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ChangeNotifierProvider(create: (_) => FavouriteProvider())
     ],
     child: MyApp(),
   ));
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         CategoriesProducts.routeName: (context) => CategoriesProducts(),
         FilterScreen.routeName: (context) => FilterScreen(),
+        FavouriteScreen.routeName: (context) => FavouriteScreen(),
       },
     );
   }

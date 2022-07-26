@@ -1,15 +1,28 @@
 import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/models/products.dart';
+import 'package:ecommerce_app_provider/providers/favourite_provider.dart';
 import 'package:ecommerce_app_provider/widgets/image_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatelessWidget {
   final Product product;
   const ProductDetails({required this.product});
   @override
   Widget build(BuildContext context) {
+    bool checkIfFavourite() {
+      if (context
+          .watch<FavouriteProvider>()
+          .getFavouriteProductsList
+          .contains(product)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,13 +49,27 @@ class ProductDetails extends StatelessWidget {
               ), // should be a paged
               // view.
               Positioned(
-                child: FloatingActionButton(
-                    elevation: 2,
-                    child: Icon(
-                      Icons.favorite_border,
-                    ),
-                    backgroundColor: HexColor(mainAppColorCode),
-                    onPressed: () {}),
+                child: checkIfFavourite()
+                    ? FloatingActionButton(
+                        elevation: 2,
+                        child: Icon(
+                          Icons.favorite,
+                        ),
+                        backgroundColor: HexColor(mainAppColorCode),
+                        onPressed: () => context
+                            .read<FavouriteProvider>()
+                            .removeProductFromFavourite(product),
+                      )
+                    : FloatingActionButton(
+                        elevation: 2,
+                        child: Icon(
+                          Icons.favorite_border,
+                        ),
+                        backgroundColor: HexColor(mainAppColorCode),
+                        onPressed: () => context
+                            .read<FavouriteProvider>()
+                            .addProductToFavourite(product),
+                      ),
                 bottom: 10,
                 right: 10,
               ),

@@ -91,6 +91,7 @@ class _CategoriesProductsState extends State<CategoriesProducts> {
         title: 'Products',
         hasBottom: false,
         key: _scaffoldkey,
+        isBackButton: true,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

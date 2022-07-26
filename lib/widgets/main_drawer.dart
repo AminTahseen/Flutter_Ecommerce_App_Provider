@@ -2,6 +2,7 @@ import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
 import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
+import 'package:ecommerce_app_provider/screens/favourites_screen.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,18 +47,18 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.home_outlined),
             title: Text('Home'),
-            onTap: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  HomeScreen.routeName, (route) => false);
-            },
+            onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                HomeScreen.routeName, (Route<dynamic> route) => false),
           ),
           ListTile(
             leading: Icon(Icons.favorite_outline),
-            title: Text('Favorties'),
+            title: Text('Favourite'),
+            onTap: () =>
+                Navigator.of(context).pushNamed(FavouriteScreen.routeName),
           ),
           ListTile(
-            onTap: () => Navigator.pushNamedAndRemoveUntil(
-                context, CategoriesProducts.routeName, (route) => false,
+            onTap: () => Navigator.pushNamed(
+                context, CategoriesProducts.routeName,
                 arguments: CategoryProductsArgs(-1)),
             leading: Icon(Icons.add_shopping_cart_outlined),
             title: Text('All Products'),
