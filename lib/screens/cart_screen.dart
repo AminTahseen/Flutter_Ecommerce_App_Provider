@@ -23,15 +23,16 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   var hasLoaded = false;
+  var total_Bill = 0.0;
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   getUserCart(int id) async {
-    Cart? userCart = await RemoteService().getUserCart(id);
+    var userCart = await RemoteService().getUserCart(id);
     if (userCart != null) {
       setState(() {
         hasLoaded = true;
       });
-      print('cart is : ${userCart.toJson()}');
+      print('cart is : ${userCart.toString()}');
       context.read<CartProvider>().assignNewCart(userCart);
     } else {
       print('cart is : null');
@@ -55,11 +56,30 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  getTotalBill() {
+    var totalBill = 0.0;
+    for (var i = 0;
+        i < context.read<CartProvider>().getUserCart.products.length;
+        i++) {
+      var product = context.read<ProductProvider>().getSingleProductById(
+            context.read<CartProvider>().getUserCart.products[i].productId,
+          );
+
+      var quantity =
+          context.read<CartProvider>().getUserCart.products[i].quantity;
+      totalBill += (product.price * quantity);
+    }
+    setState(() {
+      total_Bill = totalBill;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     getAllProduct();
     getUserCart(1);
+    getTotalBill();
   }
 
   @override
@@ -83,6 +103,7 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
+                    height: MediaQuery.of(context).size.height * 0.05,
                     margin: const EdgeInsets.only(top: 20),
                     child: Text(
                       'My Cart',
@@ -91,22 +112,40 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   CartListHolder(),
-                  SizedBox(
-                    height: 200,
+                  Container(
+                    margin: const EdgeInsets.only(
+                        bottom: 10.0, right: 20.0, left: 20.0),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Total Bill : ',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          '\$$total_Bill',
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      width: MediaQuery.of(context).size.width,
-                      height: 100,
-                      child: ElevatedButton(
-                          child: const Text('Checkout'),
-                          style: ElevatedButton.styleFrom(
-                              primary: HexColor(mainAppColorCode)),
-                          onPressed: () {}),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.10,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      child: const Text('Checkout'),
+                      style: ElevatedButton.styleFrom(
+                          primary: HexColor(mainAppColorCode)),
+                      onPressed: () {},
                     ),
                   ),
                 ],

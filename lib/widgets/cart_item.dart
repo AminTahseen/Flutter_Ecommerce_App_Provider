@@ -45,7 +45,9 @@ class _CartItemState extends State<CartItem> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Text('\$ ${widget.product.price}'),
+                Expanded(
+                    child: Text(
+                        'Total : \$${widget.product.price * widget.quantity}')),
               ],
             ),
           ),
@@ -54,17 +56,35 @@ class _CartItemState extends State<CartItem> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                new IconButton(
-                  icon: new Icon(Icons.remove),
-                  onPressed: () => decrement(),
+                CircleAvatar(
+                  radius: 15,
+                  backgroundColor: HexColor(mainAppColorCode),
+                  child: new IconButton(
+                    icon: new Icon(
+                      Icons.remove,
+                      size: 15,
+                    ),
+                    onPressed: () => decrement(),
+                  ),
                 ),
-                new Text(
-                  widget.quantity.toString(),
-                  style: TextStyle(
-                      fontSize: 20, color: HexColor(mainAppColorCode)),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: new Text(
+                    widget.quantity.toString(),
+                    style: TextStyle(
+                        fontSize: 20, color: HexColor(mainAppColorCode)),
+                  ),
                 ),
-                new IconButton(
-                    icon: new Icon(Icons.add), onPressed: () => increment()),
+                CircleAvatar(
+                  radius: 15,
+                  backgroundColor: HexColor(mainAppColorCode),
+                  child: new IconButton(
+                      icon: new Icon(
+                        Icons.add,
+                        size: 15,
+                      ),
+                      onPressed: () => increment()),
+                ),
               ],
             ),
           ),

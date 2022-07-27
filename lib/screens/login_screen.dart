@@ -64,22 +64,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    'Login Now',
-                    style: TextStyle(
-                        color: HexColor(mainAppColorCode),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30),
-                  )),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  'Login Now',
+                  style: TextStyle(
+                      color: HexColor(mainAppColorCode),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                ),
+              ),
               Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Please sign in to your account',
-                    style: TextStyle(fontSize: 20),
-                  )),
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Please sign in to your account',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(

@@ -1,6 +1,8 @@
 import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/models/cart.dart';
 import 'package:ecommerce_app_provider/models/products.dart';
+import 'package:ecommerce_app_provider/providers/cart_provider.dart';
 import 'package:ecommerce_app_provider/providers/favourite_provider.dart';
 import 'package:ecommerce_app_provider/widgets/image_dialog.dart';
 import 'package:flutter/material.dart';
@@ -144,7 +146,8 @@ class ProductDetails extends StatelessWidget {
               child: const Text('Add To Cart'),
               style:
                   ElevatedButton.styleFrom(primary: HexColor(mainAppColorCode)),
-              onPressed: () {},
+              onPressed: () => context.read<CartProvider>().addProductToCart(
+                  new CartProduct(productId: product.id, quantity: 1)),
             ),
           ),
         ],

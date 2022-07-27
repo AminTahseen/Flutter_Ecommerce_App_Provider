@@ -1,11 +1,14 @@
+import 'package:badges/badges.dart';
 import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/providers/favourite_provider.dart';
 import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
 import 'package:ecommerce_app_provider/screens/favourites_screen.dart';
 import 'package:ecommerce_app_provider/screens/home_screen.dart';
 import 'package:ecommerce_app_provider/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -32,7 +35,7 @@ class NavigationDrawer extends StatelessWidget {
               ),
             ),
             accountEmail: Text(
-              "ameen@appmaking.co",
+              "ameen@devlogic.com",
               style: TextStyle(color: Colors.black54),
             ),
             currentAccountPicture: CircleAvatar(
@@ -51,7 +54,28 @@ class NavigationDrawer extends StatelessWidget {
                 HomeScreen.routeName, (Route<dynamic> route) => false),
           ),
           ListTile(
-            leading: Icon(Icons.favorite_outline),
+            leading: context
+                        .watch<FavouriteProvider>()
+                        .getFavouriteProductsList
+                        .length >
+                    0
+                ? Badge(
+                    badgeColor: Colors.red,
+                    badgeContent: Text(
+                      context
+                          .watch<FavouriteProvider>()
+                          .getFavouriteProductsList
+                          .length
+                          .toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    child: Icon(
+                      Icons.favorite_outline,
+                    ),
+                  )
+                : Icon(
+                    Icons.favorite_outline,
+                  ),
             title: Text('Favourite'),
             onTap: () =>
                 Navigator.of(context).pushNamed(FavouriteScreen.routeName),

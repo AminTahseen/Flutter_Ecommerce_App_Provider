@@ -1,6 +1,7 @@
 import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/category_product_args.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/providers/cart_provider.dart';
 import 'package:ecommerce_app_provider/providers/categories_provider.dart';
 import 'package:ecommerce_app_provider/screens/categories_products_screen.dart';
 import 'package:ecommerce_app_provider/services/remote/remote_service.dart';
@@ -25,10 +26,21 @@ class _HomeScreenState extends State<HomeScreen> {
   var isCategLoaded = false;
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
+  getUserCart(int id) async {
+    var userCart = await RemoteService().getUserCart(id);
+    if (userCart != null) {
+      print('cart is : ${userCart.toString()}');
+      context.read<CartProvider>().assignNewCart(userCart);
+    } else {
+      print('cart is : null');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     this.getCategories(context);
+    this.getUserCart(1);
   }
 
   void getCategories(BuildContext context) async {
@@ -78,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         'View All',
                         style: TextStyle(
-                            fontSize: 15.0, color: HexColor('#a4b0be')),
+                            fontSize: 15.0, color: HexColor('#95a5a6')),
                       ),
                     )
                   ],

@@ -1,9 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:ecommerce_app_provider/helpers/constants.dart';
 import 'package:ecommerce_app_provider/helpers/utils/hex_color.dart';
+import 'package:ecommerce_app_provider/providers/cart_provider.dart';
 import 'package:ecommerce_app_provider/screens/cart_screen.dart';
 import 'package:ecommerce_app_provider/screens/filter_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 AppBar mainAppBar({
   required BuildContext context,
@@ -36,15 +38,25 @@ AppBar mainAppBar({
               child: Container(
                 padding: const EdgeInsets.only(top: 10.0, right: 10.0),
                 margin: const EdgeInsets.only(right: 5.0),
-                child: Badge(
-                  badgeColor: Colors.yellow,
-                  badgeContent: Text(
-                    '5',
-                  ),
-                  child: Icon(
-                    Icons.shopping_bag_outlined,
-                  ),
-                ),
+                child: context.watch<CartProvider>().showValue == true
+                    ? Badge(
+                        badgeColor: Colors.red,
+                        badgeContent: Text(
+                          context
+                              .watch<CartProvider>()
+                              .getUserCart
+                              .products
+                              .length
+                              .toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        child: Icon(
+                          Icons.shopping_bag_outlined,
+                        ),
+                      )
+                    : Icon(
+                        Icons.shopping_bag_outlined,
+                      ),
               ),
             )
           : Container()

@@ -9,24 +9,30 @@ class CartListHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: ListView.builder(
-        itemCount: context.read<CartProvider>().getUserCart.products.length,
-        itemBuilder: (context, position) {
-          return CartItem(
-              context.read<ProductProvider>().getSingleProductById(context
-                  .read<CartProvider>()
-                  .getUserCart
-                  .products[position]
-                  .productId),
-              context
-                  .read<CartProvider>()
-                  .getUserCart
-                  .products[position]
-                  .quantity);
-        },
-      ),
-    );
+    return context.read<CartProvider>().getUserCart != null
+        ? Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: ListView.builder(
+              itemCount:
+                  context.read<CartProvider>().getUserCart.products.length,
+              itemBuilder: (context, position) {
+                return CartItem(
+                  context.read<ProductProvider>().getSingleProductById(
+                        context
+                            .read<CartProvider>()
+                            .getUserCart
+                            .products[position]
+                            .productId,
+                      ),
+                  context
+                      .read<CartProvider>()
+                      .getUserCart
+                      .products[position]
+                      .quantity,
+                );
+              },
+            ),
+          )
+        : Text('Loading');
   }
 }

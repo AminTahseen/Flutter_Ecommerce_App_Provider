@@ -41,98 +41,130 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         key: _scaffoldkey,
         isBackButton: true,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Container(
-          margin: const EdgeInsets.all(10.0),
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 8.0,
-            childAspectRatio: (MediaQuery.of(context).size.width /
-                MediaQuery.of(context).size.height),
-            children: List.generate(
-              context.read<FavouriteProvider>().getFavouriteProductsList.length,
-              (index) {
-                return FadeIn(
-                  duration: Duration(milliseconds: 250),
-                  curve: Curves.easeInCirc,
-                  child: InkWell(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      ProductDetailsScreen.routeName,
-                      arguments: ProductDetailsArgs(
-                        context
-                            .read<FavouriteProvider>()
-                            .getFavouriteProductsList[index],
-                      ),
-                    ),
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                width: 200,
-                                padding: const EdgeInsets.all(10.0),
-                                height: 250,
-                                child: FadeInImage.assetNetwork(
-                                  placeholder: 'assets/images/loading.gif',
-                                  image: context
-                                      .read<FavouriteProvider>()
-                                      .getFavouriteProductsList[index]
-                                      .image,
-                                ),
-                              ),
-                              Positioned(
-                                child: FloatingActionButton(
-                                  elevation: 2,
-                                  child: Icon(
-                                    Icons.favorite,
-                                  ),
-                                  backgroundColor: Colors.red,
-                                  onPressed: () => context
-                                      .read<FavouriteProvider>()
-                                      .removeProductFromFavourite(context
-                                          .read<FavouriteProvider>()
-                                          .getFavouriteProductsList[index]),
-                                ),
-                                top: 10,
-                                right: 10,
-                              )
-                            ],
-                          ),
-                          ListTile(
-                            title: Text(
+      body: context.read<FavouriteProvider>().getFavouriteProductsList.length !=
+              0
+          ? Container(
+              height: MediaQuery.of(context).size.height,
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 8.0,
+                  childAspectRatio: (MediaQuery.of(context).size.width /
+                      MediaQuery.of(context).size.height),
+                  children: List.generate(
+                    context
+                        .read<FavouriteProvider>()
+                        .getFavouriteProductsList
+                        .length,
+                    (index) {
+                      return FadeIn(
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.easeInCirc,
+                        child: InkWell(
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            ProductDetailsScreen.routeName,
+                            arguments: ProductDetailsArgs(
                               context
                                   .read<FavouriteProvider>()
-                                  .getFavouriteProductsList[index]
-                                  .title,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Text(
-                                '\$ ${context.read<FavouriteProvider>().getFavouriteProductsList[index].price}',
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.8),
-                                    fontSize: 20),
-                              ),
+                                  .getFavouriteProductsList[index],
                             ),
                           ),
-                        ],
+                          child: Card(
+                            clipBehavior: Clip.antiAlias,
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: 200,
+                                      padding: const EdgeInsets.all(10.0),
+                                      height: 250,
+                                      child: FadeInImage.assetNetwork(
+                                        placeholder:
+                                            'assets/images/loading.gif',
+                                        image: context
+                                            .read<FavouriteProvider>()
+                                            .getFavouriteProductsList[index]
+                                            .image,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      child: FloatingActionButton(
+                                        elevation: 2,
+                                        child: Icon(
+                                          Icons.favorite,
+                                        ),
+                                        backgroundColor: Colors.red,
+                                        onPressed: () => context
+                                            .read<FavouriteProvider>()
+                                            .removeProductFromFavourite(context
+                                                    .read<FavouriteProvider>()
+                                                    .getFavouriteProductsList[
+                                                index]),
+                                      ),
+                                      top: 10,
+                                      right: 10,
+                                    )
+                                  ],
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    context
+                                        .read<FavouriteProvider>()
+                                        .getFavouriteProductsList[index]
+                                        .title,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Text(
+                                      '\$ ${context.read<FavouriteProvider>().getFavouriteProductsList[index].price}',
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.8),
+                                          fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            )
+          : Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.face_retouching_natural_outlined,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Oops',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: HexColor(mainAppColorCode),
                       ),
                     ),
                   ),
-                );
-              },
+                  Text('You Do Not Have Any favourites..'),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
