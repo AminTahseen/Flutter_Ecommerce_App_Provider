@@ -13,4 +13,11 @@ class ProductProvider extends ChangeNotifier {
     _productsList.add(product);
     notifyListeners();
   }
+
+  Product getSingleProductById(int id) {
+    print('id : $id');
+    var data = getProductsList.firstWhere((row) => (row.id == id));
+    print(data);
+    return data;
+  }
 }

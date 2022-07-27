@@ -8,6 +8,7 @@ import 'package:ecommerce_app_provider/widgets/main_app_bar.dart';
 import 'package:ecommerce_app_provider/widgets/main_drawer.dart';
 import 'package:ecommerce_app_provider/widgets/product_list.dart';
 import 'package:ecommerce_app_provider/widgets/products_category.dart';
+import 'package:ecommerce_app_provider/widgets/progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,11 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           child: Column(
             children: <Widget>[
-              isCategLoaded
-                  ? ProductCategory()
-                  : Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: CircularProgressIndicator()),
+              isCategLoaded ? ProductCategory() : ShowProgress(),
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: Row(

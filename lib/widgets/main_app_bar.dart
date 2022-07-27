@@ -11,6 +11,7 @@ AppBar mainAppBar({
   required bool hasBottom,
   required GlobalKey<ScaffoldState> key,
   bool isBackButton = false,
+  bool isCartVisible = true,
 }) {
   return AppBar(
     backgroundColor: HexColor(mainAppColorCode),
@@ -29,22 +30,24 @@ AppBar mainAppBar({
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
     actions: <Widget>[
-      InkWell(
-        onTap: () => Navigator.pushNamed(context, CartScreen.routeName),
-        child: Container(
-          padding: const EdgeInsets.only(top: 10.0, right: 10.0),
-          margin: const EdgeInsets.only(right: 5.0),
-          child: Badge(
-            badgeColor: Colors.yellow,
-            badgeContent: Text(
-              '5',
-            ),
-            child: Icon(
-              Icons.shopping_bag_outlined,
-            ),
-          ),
-        ),
-      ),
+      isCartVisible
+          ? InkWell(
+              onTap: () => Navigator.pushNamed(context, CartScreen.routeName),
+              child: Container(
+                padding: const EdgeInsets.only(top: 10.0, right: 10.0),
+                margin: const EdgeInsets.only(right: 5.0),
+                child: Badge(
+                  badgeColor: Colors.yellow,
+                  badgeContent: Text(
+                    '5',
+                  ),
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                  ),
+                ),
+              ),
+            )
+          : Container()
     ],
     bottom: hasBottom == true
         ? PreferredSize(

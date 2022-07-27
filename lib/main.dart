@@ -1,3 +1,4 @@
+import 'package:ecommerce_app_provider/providers/cart_provider.dart';
 import 'package:ecommerce_app_provider/providers/categories_provider.dart';
 import 'package:ecommerce_app_provider/providers/favourite_provider.dart';
 import 'package:ecommerce_app_provider/providers/product_provider.dart';
@@ -17,7 +18,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
-        ChangeNotifierProvider(create: (_) => FavouriteProvider())
+        ChangeNotifierProvider(create: (_) => FavouriteProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MyApp(),
     ),

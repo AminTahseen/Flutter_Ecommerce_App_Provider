@@ -3,6 +3,7 @@ import 'package:ecommerce_app_provider/models/products.dart';
 import 'package:ecommerce_app_provider/providers/product_provider.dart';
 import 'package:ecommerce_app_provider/screens/product_details_screen.dart';
 import 'package:ecommerce_app_provider/services/remote/remote_service.dart';
+import 'package:ecommerce_app_provider/widgets/progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +112,7 @@ class _ProductListState extends State<ProductList> {
               ),
             )
           : Center(
-              child: CircularProgressIndicator(),
+              child: ShowProgress(),
             ),
     );
   }

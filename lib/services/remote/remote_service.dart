@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ecommerce_app_provider/helpers/constants.dart';
+import 'package:ecommerce_app_provider/models/cart.dart';
 import 'package:ecommerce_app_provider/models/products.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,6 +36,17 @@ class RemoteService {
       var json = response.body;
       print(json);
       return productFromJson(json);
+    }
+  }
+
+  Future<Cart?> getUserCart(int userId) async {
+    var client = http.Client();
+    var uri = Uri.parse(BASE_URL_CART + "/$userId");
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var json = response.body;
+      print(json);
+      return cartFromJson(json);
     }
   }
 }
